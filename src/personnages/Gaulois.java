@@ -23,7 +23,7 @@ public class Gaulois {
 	
 	public void frapperRomain(Romain romain) {
 		System.out.println("Le gaulois "+nom+" envoie un grand coup dans la mâchoire de "+romain.getNom());
-		romain.recevoirCoup(force/3);
+		romain.recevoirCoup((force/3)*effetPotion);
 		
 	}
 	
@@ -38,11 +38,20 @@ public class Gaulois {
 	private String prendreParole() {
 		return "Le gaulois "+ nom +" prend la parole: ";
 	}
+	
+	public void boirePotion(int forcePotion) {
+		effetPotion=force*forcePotion;
+		parler("Merci Druide, je sens que ma force est "+forcePotion+" fois décuplée");
+	}
+	
 	public static void main(String[] args) {
 		Gaulois asterix=new Gaulois("asterix",8);
 		Romain minus=new Romain("minus",80);
+		asterix.boirePotion(11);
 		asterix.frapperRomain(minus);
 		asterix.parler("Coucou");
+		asterix.getNom();
+		
 	}
 
 }
