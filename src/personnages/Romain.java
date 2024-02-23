@@ -35,10 +35,11 @@ public class Romain {
 
 	public void recevoirCoup(int forceCoup) {
 	   force-=forceCoup;
+	   
 	   if (force>0) {
-		System.out.println("Aie j'ai mal");
+		parler("Aïe");
 	} else {
-		System.out.println("J'abandonne...");
+		parler("J'abandonne...");
 	}
 		
 	}
