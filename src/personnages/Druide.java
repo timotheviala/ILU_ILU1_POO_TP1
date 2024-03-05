@@ -1,65 +1,69 @@
 package personnages;
+
 import java.util.Random;
 
 public class Druide {
-	//attribut
+	// attribut
 	private String nom;
 	private int effetPotionMin;
 	private int effetPotionMax;
-	private int forcePotion=1;
-	
-	//constructeur
-	public Druide(String nom,int effetPotionMin,int effetPotionMax) {
-		this.nom=nom;
-		this.effetPotionMin=effetPotionMin;
-		this.effetPotionMax=effetPotionMax;
-		System.out.println("Le druide "+ nom+ " a un effet potion qui va de "+effetPotionMin+" a "+effetPotionMax);
+
+	// constructeur
+	public Druide(String nom, int effetPotionMin, int effetPotionMax) {
+		this.nom = nom;
+		this.effetPotionMin = effetPotionMin;
+		this.effetPotionMax = effetPotionMax;
+		System.out.println(
+				"Le druide " + nom + " a un effet potion qui va de " + effetPotionMin + " a " + effetPotionMax);
 	}
-	
-	//methode
+
+	// methode
 	public String getNom() {
 		return nom;
 	}
+
 	public int geteffetPotionMin() {
 		return effetPotionMin;
 	}
+
 	public int geteffetPotionMax() {
 		return effetPotionMax;
 	}
-	
+
 	public void parler(String texte) {
-		System.out.println(prendreParole()+"<<"+texte+">>");
+		System.out.println(prendreParole() + "<<" + texte + ">>");
 	}
+
 	private String prendreParole() {
-		return "Le druide "+ nom +" prend la parole";
+		return "Le druide " + nom + ": ";
 	}
-	
+
 	public int preparerPotion() {
 		parler("Je vais aller préparer une petite potion.");
-		Random random= new Random();
-		int forcePot=random.nextInt(effetPotionMin,effetPotionMax);
-		if (forcePot>7) {
-			parler("J'ai prépéaré une super potion de "+forcePot);
+		Random random = new Random();
+		int forcePot = random.nextInt(effetPotionMin, effetPotionMax);
+		if (forcePot > 7) {
+			parler("J'ai prépéaré une super potion de " + forcePot);
 			return forcePot;
 		} else {
-			parler("Je n'avais pas tous les ingrédients ma potion est de seulement "+forcePot);
+			parler("Je n'avais pas tous les ingrédients ma potion est de seulement " + forcePot);
 			return forcePot;
-		}    
+		}
 	}
-	
+
 	public void booster(Gaulois gaulois) {
-		if (gaulois.getNom()=="Obélix") {
+		if (gaulois.getNom() == "Obélix") {
 			parler("Non Obélix!");
 		} else {
-		gaulois.boirePotion(preparerPotion());
+			gaulois.boirePotion(preparerPotion());
+		}
 	}
-	}
-	public static void main(String [] args) {
-		Druide panoramix=new Druide("Panoramix",5,10);
+
+	public static void main(String[] args) {
+		Druide panoramix = new Druide("Panoramix", 5, 10);
 		panoramix.preparerPotion();
 		panoramix.preparerPotion();
 		panoramix.preparerPotion();
 	}
-	
-	
+
 }

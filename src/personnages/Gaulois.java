@@ -3,8 +3,10 @@ package personnages;
 public class Gaulois {
 	// attribut
 	private String nom;
-	private int force;
 	private int effetPotion = 1;
+	private int force;
+	private int nbTrophees;
+	private Equipement[] trophees = new Equipement[100];
 
 	// constructeur
 	public Gaulois(String nom, int force) {
@@ -21,11 +23,11 @@ public class Gaulois {
 		return force;
 	}
 
-	public void frapperRomain(Romain romain) {
-		System.out.println("Le gaulois " + nom + " envoie un grand coup dans la mâchoire de " + romain.getNom());
-		romain.recevoirCoup((force / 3) * effetPotion);
-
-	}
+//	public void frapperRomain(Romain romain) {
+//		System.out.println("Le gaulois " + nom + " envoie un grand coup dans la mâchoire de " + romain.getNom());
+//		romain.recevoirCoup((force / 3) * effetPotion);
+//
+//	}
 
 	@Override
 	public String toString() {
@@ -36,9 +38,29 @@ public class Gaulois {
 		System.out.println(prendreParole() + "<<" + texte + ">>");
 	}
 
+//	private String prendreParole() {
+//		return "Le gaulois " + nom + " prend la parole: ";
+//	}
+
+	// debut bug
 	private String prendreParole() {
-		return "Le gaulois " + nom + " prend la parole: ";
+		return "Le gaulois " + nom + " : ";
 	}
+
+	public void frapperRomain(Romain romain) {
+		System.out.println(nom + " envoie un grand coup dans la mâchoire de " + romain.getNom());
+		Equipement[] tropheesRecus = romain.recevoirCoup((force / 3) * effetPotion);
+		int i = 0;
+		while (i < tropheesRecus.length) {
+			if (tropheesRecus[i] != null) {
+				this.trophees[nbTrophees] = tropheesRecus[i];
+				nbTrophees += 1;
+			}
+
+		}
+	}
+
+	// fin bug
 
 	public void boirePotion(int forcePotion) {
 		effetPotion = force * forcePotion;
