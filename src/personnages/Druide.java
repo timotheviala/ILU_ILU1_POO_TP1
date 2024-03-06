@@ -7,6 +7,7 @@ public class Druide {
 	private String nom;
 	private int effetPotionMin;
 	private int effetPotionMax;
+	private int forcePot;
 
 	// constructeur
 	public Druide(String nom, int effetPotionMin, int effetPotionMax) {
@@ -41,9 +42,9 @@ public class Druide {
 	public int preparerPotion() {
 		parler("Je vais aller préparer une petite potion.");
 		Random random = new Random();
-		int forcePot = random.nextInt(effetPotionMin, effetPotionMax);
+		forcePot = random.nextInt(effetPotionMin, effetPotionMax);
 		if (forcePot > 7) {
-			parler("J'ai prépéaré une super potion de " + forcePot);
+			parler("J'ai préparé une super potion de " + forcePot);
 			return forcePot;
 		} else {
 			parler("Je n'avais pas tous les ingrédients ma potion est de seulement " + forcePot);
@@ -55,7 +56,7 @@ public class Druide {
 		if (gaulois.getNom() == "Obélix") {
 			parler("Non Obélix!");
 		} else {
-			gaulois.boirePotion(preparerPotion());
+			gaulois.boirePotion(forcePot);
 		}
 	}
 

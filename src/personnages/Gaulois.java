@@ -50,20 +50,19 @@ public class Gaulois {
 	public void frapperRomain(Romain romain) {
 		System.out.println(nom + " envoie un grand coup dans la mâchoire de " + romain.getNom());
 		Equipement[] tropheesRecus = romain.recevoirCoup((force / 3) * effetPotion);
+		if(tropheesRecus!=null) {
 		int i = 0;
 		while (i < tropheesRecus.length) {
 			if (tropheesRecus[i] != null) {
 				this.trophees[nbTrophees] = tropheesRecus[i];
 				nbTrophees += 1;
-			}
-
-		}
+			}}}
 	}
 
 	// fin bug
 
 	public void boirePotion(int forcePotion) {
-		effetPotion = force * forcePotion;
+		effetPotion =forcePotion;
 		parler("Merci Druide, je sens que ma force est " + forcePotion + " fois décuplée");
 	}
 
