@@ -8,6 +8,7 @@ public class Gaulois {
 	private int nbTrophees;
 	private Equipement[] trophees = new Equipement[100];
 
+
 	// constructeur
 	public Gaulois(String nom, int force) {
 		this.nom = nom;
@@ -28,6 +29,19 @@ public class Gaulois {
 //		romain.recevoirCoup((force / 3) * effetPotion);
 //
 //	}
+	
+	public void faireUneDonnation(Musee musee) {
+		if (trophees!=null) {
+			parler("Je donne l'intégralité de mes trophées au musée des Gaulois");
+			int i=0;
+			while(trophees[i]!=null) {
+				if(trophees[i]==Equipement.BOUCLIER) {
+					System.out.println("-bouclier"+trophees[i]);
+				}else {
+					System.out.println("-casque");
+				}
+				i++;}}		
+	}
 
 	@Override
 	public String toString() {
@@ -51,12 +65,14 @@ public class Gaulois {
 		System.out.println(nom + " envoie un grand coup dans la mâchoire de " + romain.getNom());
 		Equipement[] tropheesRecus = romain.recevoirCoup((force / 3) * effetPotion);
 		if(tropheesRecus!=null) {
-		int i = 0;
-		while (i < tropheesRecus.length) {
-			if (tropheesRecus[i] != null) {
-				this.trophees[nbTrophees] = tropheesRecus[i];
-				nbTrophees += 1;
-			}}}
+		   int i = 0;
+		   while (i < tropheesRecus.length) {
+				   this.trophees[nbTrophees] = tropheesRecus[i];
+				   nbTrophees += 1;
+			
+			   i++;
+			}
+		 }
 	}
 
 	// fin bug
@@ -68,11 +84,11 @@ public class Gaulois {
 
 	public static void main(String[] args) {
 		Gaulois asterix = new Gaulois("asterix", 8);
-		Romain minus = new Romain("minus", 80);
+		Romain minus = new Romain("minus", 3);
+		Musee musee=new Musee();
 		asterix.boirePotion(11);
 		asterix.frapperRomain(minus);
-		asterix.parler("Coucou");
-		asterix.getNom();
+		asterix.faireUneDonnation(musee);
 
 	}
 

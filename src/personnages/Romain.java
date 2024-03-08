@@ -6,6 +6,7 @@ public class Romain {
 	private int force;
 	private Equipement[] equipements = new Equipement[2];
 	private int nbEquipement = 0;
+	private boolean vainqueur;
 
 	// constructeur
 	public Romain(String nom, int force) {
@@ -15,6 +16,7 @@ public class Romain {
 	}
 
 	// methode
+	
 
 	public void sEquiper(Equipement equipement) {
 		switch (nbEquipement) {
@@ -40,6 +42,11 @@ public class Romain {
 
 	}
 
+	public boolean isVainqueur() {
+		return vainqueur;
+	}
+
+
 	public String getNom() {
 		return nom;
 	}
@@ -54,6 +61,12 @@ public class Romain {
 
 	private String prendreParole() {
 		return "Le romain " + nom + " prend la parole: ";
+	}
+	
+	
+
+	public int getNbEquipement() {
+		return nbEquipement;
 	}
 
 	@Override
@@ -78,7 +91,7 @@ public class Romain {
 	public Equipement[] recevoirCoup(int forceCoup) {
 		Equipement[] equipementEjecte = null;
 		// précondition
-		assert force > 0;
+//		assert force > 0;
 		int oldForce = force;
 		forceCoup = calculResistanceEquipement(forceCoup);
 		force -= forceCoup;
@@ -90,38 +103,33 @@ public class Romain {
 			
 		}
 		// post condition la force a diminuée
-		assert force < oldForce;
+		if (oldForce==force) {
+			vainqueur=true;
+		};
 		return equipementEjecte;
 	}
 
 	private int calculResistanceEquipement(int forceCoup) {
 		String texte = "Ma force est de " + this.force + ", et la force du coup est de " + forceCoup;
-		int resistanceEquipement = 0;
+		int resistanceEquipement=0;
 		if (nbEquipement != 0) {
 			String texte2 = "\nMais heureusement, grace à mon équipement sa force est diminué de ";
 			for (int i = 0; i < nbEquipement; i++) {
 				if ((equipements[i] != null && equipements[i].equals(Equipement.BOUCLIER))) {
-					if (forceCoup <= 8 || resistanceEquipement>=8) {
-						forceCoup=0;
-					} else {
-						resistanceEquipement += 8;
-					}
+					resistanceEquipement+=8;
 				} else {
-					if (forceCoup <= 5 || resistanceEquipement >= forceCoup) {
-						forceCoup=0;
-					} else {
 						System.out.println("Equipement casque");
-						resistanceEquipement += 5;
-					}
+						resistanceEquipement+=5;
 				}
 			}
 			texte += texte2 + resistanceEquipement + "!";
 		}
 		parler(texte);
-		if(forceCoup==0) {
+		if (resistanceEquipement>=forceCoup){
+			forceCoup=0;
 			return forceCoup;
 		}
-		forceCoup -= resistanceEquipement;
+		forceCoup-=resistanceEquipement;
 		return forceCoup;
 	}
 
@@ -141,12 +149,16 @@ public class Romain {
 
 	public static void main(String[] args) {
 		Romain minus = new Romain("Minus", 6);
-		minus.recevoirCoup(20);
+		Gaulois asterix = new Gaulois("asterix",8);
+		minus.recevoirCoup(6);
+		asterix.frapperRomain(minus);
 		minus.sEquiper(Equipement.CASQUE);
 		minus.sEquiper(Equipement.CASQUE);
 		minus.sEquiper(Equipement.BOUCLIER);
 		minus.sEquiper(Equipement.CASQUE);
-
+		System.out.println(minus.getNbEquipement());
+        Musee musee=new Musee();
+		asterix.faireUneDonnation(musee);
 	}
 
 }
